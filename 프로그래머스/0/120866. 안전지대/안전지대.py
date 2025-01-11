@@ -1,29 +1,18 @@
 def solution(board):
-    n = len(board)  # 행 크기
-    m = len(board[0])  # 열 크기
-    danger_zone = [[0] * m for _ in range(n)]  # 위험 지역 표시
-    
-    # 방향 벡터: 상, 하, 좌, 우, 대각선 8방향
-    directions = [
-        (-1, 0), (1, 0), (0, -1), (0, 1),  # 상, 하, 좌, 우
-        (-1, -1), (-1, 1), (1, -1), (1, 1)  # 좌상, 우상, 좌하, 우하
-    ]
-    
-    # 지뢰 주변 지역을 위험 지역으로 표시
-    for i in range(n):
-        for j in range(m):
-            if board[i][j] == 1:  # 지뢰인 경우
-                danger_zone[i][j] = 1  # 현재 위치 위험 지역으로 설정
-                for dx, dy in directions:
-                    nx, ny = i + dx, j + dy
-                    if 0 <= nx < n and 0 <= ny < m:  # 지도 내에 있는 경우만 처리
-                        danger_zone[nx][ny] = 1
-    
-    # 안전 지역 계산
-    safe_count = 0
-    for i in range(n):
-        for j in range(m):
-            if danger_zone[i][j] == 0:  # 위험 지역이 아니면 안전 지역
-                safe_count += 1
-    
-    return safe_count
+    n = len(board) # 행의 개수
+    danger = set() # 중복 제거를 위한 집합(set)
+    # i는 현재 행의 인덱스, row는 현재 행의 리스트
+    for i, row in enumerate(board):
+        # j는 열의 인덱스, x는 해당 위치의 값
+        for j, x in enumerate(row):
+            # 현재 위치가 0인 경우
+            if not x:
+                continue
+            # 현재 위치가 1인 경우
+            for di in [-1, 0, 1]:
+                for dj in [-1, 0, 1]:
+                    new_i = i + di 
+                    new_j = j + dj  
+                    danger.add((new_i, new_j))
+    # 위험 지역 위치가 board를 벗어나지 않을 경우를 모두 더해 필드의 크기에서 빼준다.
+    return n*n - sum(0 <= i < n and 0 <= j < n for i, j in danger)

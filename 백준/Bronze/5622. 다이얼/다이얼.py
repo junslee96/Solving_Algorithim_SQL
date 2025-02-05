@@ -1,4 +1,3 @@
-# 알파벳에 해당하는 다이얼 번호를 딕셔너리로 정의
 dial = {
     'A': 2, 'B': 2, 'C': 2,
     'D': 3, 'E': 3, 'F': 3,
@@ -10,11 +9,8 @@ dial = {
     'W': 9, 'X': 9, 'Y': 9, 'Z': 9
 }
 
-# 단어 입력받기
 word = input().strip()
 
-# 최소 시간 계산
 time = sum(dial[char] + 1 for char in word)
 
-# 결과 출력
 print(time)

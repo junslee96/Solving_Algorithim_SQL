@@ -12,4 +12,3 @@ def solution(priorities, location):
             count += 1
             if current[1] == location:
                 return count
-    return count

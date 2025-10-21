@@ -6,9 +6,7 @@ for line in sys.stdin.read().splitlines():
     if line == "":
         continue
     Ns.append(int(line))
-    
-if not Ns:
-    sys.exit(0)
+
     
 maxN = max(Ns)
 

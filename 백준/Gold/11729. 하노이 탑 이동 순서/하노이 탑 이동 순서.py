@@ -9,7 +9,7 @@ def hanoi(k, a, b, c, out):
     out.write(F"{a} {c}\n")
     hanoi(k-1, b, a, c, out)
 
-total_moves = (1 << n) - 1
+total_moves = 2**n - 1
 print(total_moves)
 
 hanoi(n, 1, 2, 3, sys.stdout)
